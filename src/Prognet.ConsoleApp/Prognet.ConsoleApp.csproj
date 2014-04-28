@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleLogDocumentListener.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="NorthwindClasses.cs" />
+    <Compile Include="OrdersByCompanyIndex.cs" />
+    <Compile Include="OrdersTotalsIndex.cs" />
+    <Compile Include="ProductSalesIndex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
