@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
 using Raven.Client.Indexes;
 
 namespace Prognet.ConsoleApp
@@ -30,10 +35,46 @@ namespace Prognet.ConsoleApp
         }
     }
 
-    internal class ProductSales
+    class Product_Transformer : AbstractTransformerCreationTask<ProductSales>
+    {
+        public Product_Transformer()
+        {
+            TransformResults = sales =>
+                from s in sales
+                select new
+                {
+                    Product = LoadDocument<Product>(s.Product),
+                    Count = s.Count,
+                    Total = s.Total
+                };
+        }
+    }
+
+    class ProductSales
     {
         public string Product { get; set; }
         public int Count { get; set; }
         public int Total { get; set; }
     }
+
+    class ProductSalesView
+    {
+        public Product Product { get; set; }
+        public int Count { get; set; }
+        public int Total { get; set; }
+    }
+
+
+    /*
+     Usage:
+     * 
+        var results = session.Query<ProductSales, Product_Sales>()
+                        .TransformWith<Product_Transformer, ProductSalesView>()
+                        .ToList();
+
+        foreach (var productSalesView in results)
+        {
+            Console.WriteLine(productSalesView.AsJson());
+        }
+     */
 }

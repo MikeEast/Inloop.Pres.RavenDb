@@ -19,10 +19,10 @@ namespace Prognet.ConsoleApp
                 DefaultDatabase = "Test"
             };
             documentStore.Initialize();
+            IndexCreation.CreateIndexes(typeof(Program).Assembly, documentStore);
             
             using (var session = documentStore.OpenSession())
             {
-                
             }
 
             Console.ReadKey(true);
