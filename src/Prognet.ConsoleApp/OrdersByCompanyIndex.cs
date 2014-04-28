@@ -31,8 +31,23 @@ namespace Prognet.ConsoleApp
 
     internal class OrdersByCompany
     {
-        public Company Company { get; set; }
+        public string Company { get; set; }
         public int Count { get; set; }
         public int Total { get; set; }
     }
+
+    /*
+     * Usage:
+     
+        var results = session.Query<OrdersByCompany, Orders_ByCompany>();                    
+
+        foreach (var result in results)
+        {
+            Console.WriteLine(result.AsJson());
+        }
+     
+     
+     
+     
+     */
 }
